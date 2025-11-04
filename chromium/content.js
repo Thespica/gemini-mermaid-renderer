@@ -264,7 +264,7 @@
         copyErrorButton.className = 'mermaid-error-button';
         copyErrorButton.textContent = '复制错误信息';
         copyErrorButton.addEventListener('click', () => {
-            const fullError = `Mermaid 渲染错误:\n${errorMessage}\n\n原始代码:\n${mermaidCode}`;
+            const fullError = `Mermaid 渲染错误:\n${errorMessage}`;
             navigator.clipboard.writeText(fullError).then(() => {
                 copyErrorButton.textContent = '已复制！';
                 setTimeout(() => {
