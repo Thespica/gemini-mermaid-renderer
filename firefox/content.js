@@ -190,6 +190,7 @@
         code: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>',
         diagram: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2 0V4.07c3.95.49 7 3.85 7 7.93s-3.05 7.44-7 7.93z"/></svg>', // Simple circle for diagram
         download: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>',
+        copy: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>',
         error: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>'
     };
 
@@ -391,6 +392,22 @@
                             downloadSvg(renderedSvgContent, filename);
                         });
                         controlsDiv.appendChild(downloadSvgButton);
+
+                        const copyCodeButton = document.createElement('button');
+                        copyCodeButton.innerHTML = icons.copy + '<span>Copy Code</span>';
+                        copyCodeButton.addEventListener('click', () => {
+                            navigator.clipboard.writeText(mermaidCode).then(() => {
+                                const originalText = copyCodeButton.innerHTML;
+                                copyCodeButton.innerHTML = icons.copy + '<span>已复制！</span>';
+                                setTimeout(() => {
+                                    copyCodeButton.innerHTML = originalText;
+                                }, 2000);
+                            }).catch(err => {
+                                console.error('复制失败:', err);
+                                copyCodeButton.innerHTML = icons.copy + '<span>复制失败</span>';
+                            });
+                        });
+                        controlsDiv.appendChild(copyCodeButton);
 
                         mermaidWrapper.appendChild(controlsDiv);
                         codeBlockParent.replaceWith(mermaidWrapper);
