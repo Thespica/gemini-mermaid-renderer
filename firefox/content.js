@@ -208,12 +208,11 @@
             background-color: white;
             border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            max-width: 95vw;
-            max-height: 95vh;
-            width: 95vw;
-            height: 95vh;
-            display: flex;
-            flex-direction: column;
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 90vw;
+            height: 90vh;
+            position: relative;
             transform: scale(0.9);
             transition: transform 0.3s ease;
             cursor: default;
@@ -225,84 +224,61 @@
             background-color: #1e1e1e;
         }
 
-        .mermaid-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        body.dark-theme .mermaid-modal-header {
-            border-bottom-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .mermaid-modal-title {
-            font-weight: 600;
-            font-size: 1.1em;
-            color: #333;
-        }
-        body.dark-theme .mermaid-modal-title {
-            color: #eee;
-        }
-
         .mermaid-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
             border: none;
-            background: transparent;
-            font-size: 28px;
+            background: rgba(0, 0, 0, 0.5);
+            font-size: 24px;
             line-height: 1;
             cursor: pointer;
-            color: #666;
+            color: white;
             padding: 0;
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
-            transition: background-color 0.2s ease, color 0.2s ease;
+            border-radius: 50%;
+            transition: background-color 0.2s ease, transform 0.2s ease;
         }
         .mermaid-modal-close:hover {
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: scale(1.1);
         }
         body.dark-theme .mermaid-modal-close {
-            color: #aaa;
+            background: rgba(255, 255, 255, 0.5);
+            color: #333;
         }
         body.dark-theme .mermaid-modal-close:hover {
-            background-color: #333;
-            color: #fff;
+            background-color: rgba(255, 255, 255, 0.8);
         }
 
         .mermaid-modal-content {
-            flex: 1;
+            width: 100%;
+            height: 100%;
             overflow: auto;
             padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: grab;
+            border-radius: 12px;
+            box-sizing: border-box;
         }
         .mermaid-modal-content:active {
             cursor: grabbing;
         }
 
         .mermaid-modal-content svg {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .mermaid-modal-footer {
-            padding: 12px 20px;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        body.dark-theme .mermaid-modal-footer {
-            border-top-color: rgba(255, 255, 255, 0.05);
+            max-width: calc(100% - 40px);
+            max-height: calc(100% - 40px);
+            box-sizing: border-box;
         }
 
         /* Click hint for diagram in original position */
@@ -352,48 +328,20 @@
         const modal = document.createElement('div');
         modal.className = 'mermaid-modal';
 
-        // Create header
-        const header = document.createElement('div');
-        header.className = 'mermaid-modal-header';
-        const title = document.createElement('div');
-        title.className = 'mermaid-modal-title';
-        title.textContent = 'Mermaid 图表';
+        // Create close button (floating)
         const closeBtn = document.createElement('button');
         closeBtn.className = 'mermaid-modal-close';
         closeBtn.innerHTML = '×';
         closeBtn.setAttribute('aria-label', '关闭');
-        header.appendChild(title);
-        header.appendChild(closeBtn);
 
         // Create content
         const content = document.createElement('div');
         content.className = 'mermaid-modal-content';
         content.innerHTML = svgContent;
 
-        // Create footer with controls
-        const footer = document.createElement('div');
-        footer.className = 'mermaid-modal-footer';
-
-        const resetButton = document.createElement('button');
-        resetButton.innerHTML = icons.reset + '<span>重置视图</span>';
-        resetButton.style.cssText = 'padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; color: #555; background-color: #f9f9f9; border: 1px solid #e0e0e0;';
-
-        const downloadButton = document.createElement('button');
-        downloadButton.innerHTML = icons.download + '<span>Download SVG</span>';
-        downloadButton.style.cssText = 'padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; color: #555; background-color: #f9f9f9; border: 1px solid #e0e0e0;';
-
-        const copyButton = document.createElement('button');
-        copyButton.innerHTML = icons.copy + '<span>Copy Code</span>';
-        copyButton.style.cssText = 'padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; color: #555; background-color: #f9f9f9; border: 1px solid #e0e0e0;';
-
-        footer.appendChild(resetButton);
-        footer.appendChild(downloadButton);
-        footer.appendChild(copyButton);
-
         // Assemble modal
-        modal.appendChild(header);
+        modal.appendChild(closeBtn);
         modal.appendChild(content);
-        modal.appendChild(footer);
         overlay.appendChild(modal);
 
         // Add to body
@@ -413,32 +361,6 @@
                 minZoom: 0.5
             });
         }
-
-        // Reset button handler
-        resetButton.addEventListener('click', () => {
-            if (panzoomInstance) {
-                panzoomInstance.reset();
-            }
-        });
-
-        // Download button handler
-        downloadButton.addEventListener('click', () => {
-            const filename = `mermaid-diagram-${new Date().toISOString().slice(0, 10)}.svg`;
-            downloadSvg(svgContent, filename);
-        });
-
-        // Copy button handler
-        copyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(mermaidCode).then(() => {
-                const originalHTML = copyButton.innerHTML;
-                copyButton.innerHTML = icons.copy + '<span>已复制！</span>';
-                setTimeout(() => {
-                    copyButton.innerHTML = originalHTML;
-                }, 2000);
-            }).catch(err => {
-                console.error('复制失败:', err);
-            });
-        });
 
         // Close handlers
         const closeModal = () => {
