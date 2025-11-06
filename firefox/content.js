@@ -191,7 +191,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.85);
+            background-color: rgba(0, 0, 0, 0.65);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -208,8 +208,10 @@
             background-color: white;
             border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            max-width: 90vw;
-            max-height: 90vh;
+            max-width: 95vw;
+            max-height: 95vh;
+            width: 95vw;
+            height: 95vh;
             display: flex;
             flex-direction: column;
             transform: scale(0.9);
@@ -227,11 +229,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
         body.dark-theme .mermaid-modal-header {
-            border-bottom-color: #444;
+            border-bottom-color: rgba(255, 255, 255, 0.05);
         }
 
         .mermaid-modal-title {
@@ -293,14 +295,14 @@
         }
 
         .mermaid-modal-footer {
-            padding: 15px 20px;
-            border-top: 1px solid #e0e0e0;
+            padding: 12px 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
             display: flex;
             justify-content: center;
             gap: 10px;
         }
         body.dark-theme .mermaid-modal-footer {
-            border-top-color: #444;
+            border-top-color: rgba(255, 255, 255, 0.05);
         }
 
         /* Click hint for diagram in original position */
