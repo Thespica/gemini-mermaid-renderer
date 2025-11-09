@@ -20,68 +20,102 @@
             flex-wrap: wrap; 
         }
 
-        
+
         .mermaid-controls button {
-            
+
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
             border: none;
             background: none;
-            padding: 8px 15px; 
-            border-radius: 6px; 
+            padding: 8px 15px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9em; 
-            font-weight: 500; 
-            display: inline-flex; 
+            font-size: 0.9em;
+            font-weight: 500;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px; 
-            transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            gap: 8px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
-            
-            color: #555; 
-            background-color: #f9f9f9; 
-            border: 1px solid #e0e0e0; 
+
+            color: #666;
+            background-color: transparent;
+            border: 1.5px solid #d0d0d0;
         }
 
-        
+
         .mermaid-controls button:hover {
-            background-color: #f0f0f0; 
-            border-color: #d0d0d0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+            background-color: #f5f5f5;
+            border-color: #999;
+            transform: scale(1.03);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        .mermaid-controls button:active {
+            transform: scale(0.98);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         .mermaid-controls button:focus {
-            outline: none; 
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5); 
-            border-color: #4299e1; 
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.4);
+            border-color: #4299e1;
         }
 
-        
+
         .mermaid-controls button svg {
-            width: 16px; 
+            width: 16px;
             height: 16px;
-            fill: currentColor; 
-            flex-shrink: 0; 
+            fill: currentColor;
+            flex-shrink: 0;
         }
 
-        
+        /* Success state for copy button */
+        .mermaid-controls button.success {
+            color: #22c55e;
+            border-color: #22c55e;
+            background-color: rgba(34, 197, 94, 0.08);
+        }
+        .mermaid-controls button.success:hover {
+            transform: scale(1.03);
+            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2);
+            border-color: #22c55e;
+            background-color: rgba(34, 197, 94, 0.08);
+        }
+
+
         body.dark-theme .mermaid-output-wrapper {
             background-color: transparent;
         }
         body.dark-theme .mermaid-controls button {
-            color: #bbb; 
-            background-color: #333; 
-            border-color: #444; 
+            color: #aaa;
+            background-color: transparent;
+            border-color: #555;
         }
         body.dark-theme .mermaid-controls button:hover {
-            background-color: #444;
-            border-color: #555;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.08);
+            border-color: #777;
+            transform: scale(1.03);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        body.dark-theme .mermaid-controls button:active {
+            transform: scale(0.98);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
         body.dark-theme .mermaid-controls button:focus {
-            box-shadow: 0 0 0 3px rgba(100, 150, 250, 0.5); 
+            box-shadow: 0 0 0 3px rgba(100, 150, 250, 0.4);
             border-color: #6496fa;
+        }
+        body.dark-theme .mermaid-controls button.success {
+            color: #4ade80;
+            border-color: #4ade80;
+            background-color: rgba(74, 222, 128, 0.12);
+        }
+        body.dark-theme .mermaid-controls button.success:hover {
+            transform: scale(1.03);
+            box-shadow: 0 2px 8px rgba(74, 222, 128, 0.25);
+            border-color: #4ade80;
+            background-color: rgba(74, 222, 128, 0.12);
         }
 
         
@@ -315,6 +349,7 @@
         diagram: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2 0V4.07c3.95.49 7 3.85 7 7.93s-3.05 7.44-7 7.93z"/></svg>', // Simple circle for diagram
         download: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>',
         copy: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>',
+        check: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>',
         error: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>',
         reset: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>'
     };
@@ -559,9 +594,11 @@
                         copyCodeButton.addEventListener('click', () => {
                             navigator.clipboard.writeText(mermaidCode).then(() => {
                                 const originalText = copyCodeButton.innerHTML;
-                                copyCodeButton.innerHTML = icons.copy + '<span>已复制！</span>';
+                                copyCodeButton.innerHTML = icons.check + '<span>已复制！</span>';
+                                copyCodeButton.classList.add('success');
                                 setTimeout(() => {
                                     copyCodeButton.innerHTML = originalText;
+                                    copyCodeButton.classList.remove('success');
                                 }, 2000);
                             }).catch(err => {
                                 console.error('复制失败:', err);
