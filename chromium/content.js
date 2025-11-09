@@ -554,36 +554,6 @@
                         const controlsDiv = document.createElement('div');
                         controlsDiv.className = 'mermaid-controls';
 
-                        const toggleButton = document.createElement('button');
-                        const toggleButtonText = document.createElement('span');
-                        const toggleButtonIcon = document.createElement('span');
-
-                        toggleButton.appendChild(toggleButtonIcon);
-                        toggleButton.appendChild(toggleButtonText);
-
-                        const updateToggleButton = (isShowingDiagram) => {
-                            toggleButtonText.textContent = isShowingDiagram ? 'Show Code' : 'Show Diagram';
-                            toggleButtonIcon.innerHTML = isShowingDiagram ? icons.code : icons.diagram;
-                        };
-
-                        updateToggleButton(true);
-
-                        toggleButton.addEventListener('click', () => {
-                            const isShowingDiagram = svgContainer.style.display !== 'none';
-                            svgContainer.style.display = isShowingDiagram ? 'none' : 'block';
-                            originalCodeDisplay.style.display = isShowingDiagram ? 'block' : 'none';
-                            updateToggleButton(!isShowingDiagram);
-                        });
-                        controlsDiv.appendChild(toggleButton);
-
-                        const downloadSvgButton = document.createElement('button');
-                        downloadSvgButton.innerHTML = icons.download + '<span>Download SVG</span>';
-                        downloadSvgButton.addEventListener('click', () => {
-                            const filename = `mermaid-diagram-${new Date().toISOString().slice(0, 10)}.svg`;
-                            downloadSvg(renderedSvgContent, filename);
-                        });
-                        controlsDiv.appendChild(downloadSvgButton);
-
                         const copyCodeButton = document.createElement('button');
                         copyCodeButton.innerHTML = icons.copy + '<span>Copy Code</span>';
                         copyCodeButton.addEventListener('click', () => {
