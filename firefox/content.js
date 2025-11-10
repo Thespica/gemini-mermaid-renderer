@@ -319,27 +319,16 @@
         .mermaid-rendered-diagram {
             cursor: zoom-in;
             position: relative;
+            border-radius: 8px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            box-shadow: none;
         }
-        .mermaid-rendered-diagram::after {
-            content: '🔍 点击放大查看';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.85em;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            pointer-events: none;
+        .mermaid-rendered-diagram:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
         }
-        .mermaid-rendered-diagram:hover::after {
-            opacity: 1;
-        }
-        body.dark-theme .mermaid-rendered-diagram::after {
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #333;
+        body.dark-theme .mermaid-rendered-diagram:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
     `;
     document.head.appendChild(style);
